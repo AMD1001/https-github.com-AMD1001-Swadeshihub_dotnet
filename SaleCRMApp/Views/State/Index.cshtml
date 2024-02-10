@@ -1,0 +1,42 @@
+﻿@using SaleCRMApp.Models
+@model List<State>
+
+@{
+    ViewData["Title"] = "List of States";
+}
+
+<h2>States</h2>
+<a asp-action="Create" class="btn btn-primary">Add State</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>State Name</th>
+            <th>State Description</th>
+            <th>State Image</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var state in Model)
+        {
+            <tr>
+                <td>@state.StateName</td>
+                <td>@state.StateDescription</td>
+                <td>
+                    @if (state.StateImage != null)
+                    {
+                        <img src="data:image/png;base64,@Convert.ToBase64String(state.StateImage)" alt="State Image" style="max-width: 100px; max-height: 100px;" />
+                    }
+                    else
+                    {
+                        <p>No Image</p>
+                    }
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@state.Id">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@state.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

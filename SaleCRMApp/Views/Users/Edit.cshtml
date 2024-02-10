@@ -1,0 +1,66 @@
+﻿@model SwadeshiApp.DTO.UserProfile
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit User</title>
+    <!-- Add any additional styles or scripts here -->
+</head>
+<body>
+
+    <h2>Edit User</h2>
+
+    <form asp-action="Edit" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div>
+            <label asp-for="FirstName"></label>
+            <input asp-for="FirstName" class="form-control" />
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label asp-for="LastName"></label>
+            <input asp-for="LastName" class="form-control" />
+            <span asp-validation-for="LastName" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label asp-for="MobileNo"></label>
+            <input asp-for="MobileNo" class="form-control" />
+            <span asp-validation-for="MobileNo" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label asp-for="Gender"></label>
+            <input asp-for="Gender" class="form-control" />
+            <span asp-validation-for="Gender" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label asp-for="Address"></label>
+            <input asp-for="Address" class="form-control" />
+            <span asp-validation-for="Address" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label asp-for="city"></label>
+            <input asp-for="city" class="form-control" />
+            <span asp-validation-for="city" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label asp-for="PinCode"></label>
+            <input asp-for="PinCode" class="form-control" />
+            <span asp-validation-for="PinCode" class="text-danger"></span>
+        </div>
+
+        <button type="submit">Save</button>
+    </form>
+
+</body>
+</html>

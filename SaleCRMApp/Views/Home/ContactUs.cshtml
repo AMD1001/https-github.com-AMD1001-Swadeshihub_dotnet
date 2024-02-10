@@ -1,0 +1,53 @@
+﻿<!-- Views/Contact/ContactUs.cshtml -->
+@{
+    ViewBag.Title = "Contact Us";
+    Layout = "~/Views/Shared/_Layout.cshtml"; // Adjust as per your project structure
+}
+
+<div style="text-align: center; container-fluid d-flex justify-content-center justify-content-lg-between p-4 ;width: 100% ; background-color:bisque">
+    <h1>Contact Us</h1>
+
+    <div style="text-align: center; width: 50%; margin: 0 auto;">
+
+        <div>
+            <form action="#" method="post" style="text-align: left;">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" rows="4" class="form-control" required></textarea>
+                </div>
+
+                <button class="btn btn-primary" type="submit">Submit</button>
+            </form>
+
+            <p>
+                You can reach us at the following address:
+            </p>
+
+            <address>
+                Swadeshi Hub<br>
+                Mumbai<br>
+                Maharashtra, 400 001<br>
+                Email: <a href="mailto:SwadeshiHub@gmail.com">SwadeshiHub@gmail.com</a><br>
+                Phone: +1 (123) 456-7890
+            </address>
+
+            <p>
+                For general inquiries, please email us at <a href="mailto:kiva122026@gmail.com">SwadeshiHub@gmail.com</a>.
+            </p>
+
+            <p>
+                If you have specific questions or feedback, please use the form below:
+            </p>
+        </div>
+    </div>
+</div>

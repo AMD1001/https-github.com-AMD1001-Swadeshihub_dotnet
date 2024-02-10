@@ -1,0 +1,30 @@
+﻿@using SaleCRMApp.Models
+@model State
+
+@{
+    ViewData["Title"] = "Create State";
+}
+
+<h2>Create State</h2>
+
+<form asp-action="Create" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="StateName">State Name</label>
+        <input asp-for="StateName" class="form-control" />
+        <span asp-validation-for="StateName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="StateDescription">State Description</label>
+        <textarea asp-for="StateDescription" class="form-control"></textarea>
+        <span asp-validation-for="StateDescription" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="StateImageFile">State Image</label>
+        <input asp-for="StateImageFile" type="file" class="form-control" />
+        <span asp-validation-for="StateImageFile" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>

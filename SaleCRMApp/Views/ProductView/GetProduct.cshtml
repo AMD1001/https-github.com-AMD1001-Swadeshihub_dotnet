@@ -1,0 +1,49 @@
+﻿@{
+    ViewData["Title"] = "GetProduct";
+}
+
+@using SwadeshiApp.Models
+@model List<Product>
+
+<style>
+    .card {
+        transition: transform 0.2s;
+        text-align: center; /* Center-align content */
+    }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+    .card-img-top {
+        transition: transform 0.2s;
+    }
+
+    .card:hover .card-img-top {
+        transform: scale(1.2);
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+        @foreach (var product in Model)
+        {
+            <div class="col-md-4">
+                <div class="card mb-4" style="height: 400px; overflow: hidden;">
+                    <div class="card-img-top" style="height: 200px; overflow: hidden;">
+                        <img src="@product.PicturePath" class="img-fluid" alt="@product.Name" style="height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">@product.Name</h3>
+                        <p class="card-text"  overflow: hidden;">@product.ShortDescription</p>
+                        <h5 class="card-title">@product.UnitPrice</h5>
+                        <div class="btn-group">
+                            <a href="#" class="btn btn-primary">Add to Cart</a>
+                            <a href="#" class="btn btn-success">Buy Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

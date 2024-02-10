@@ -1,0 +1,15 @@
+﻿@using SaleCRMApp.Models
+@model State
+
+@{
+    ViewData["Title"] = "Delete State";
+}
+
+<h2>Delete State</h2>
+
+<p>Are you sure you want to delete the state <strong>@Model.StateName</strong>?</p>
+
+<form asp-action="Delete" asp-route-id="@Model.Id" method="post">
+    <button type="submit" class="btn btn-danger">Delete</button> |
+    <a asp-action="Index">Cancel</a>
+</form>

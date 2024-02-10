@@ -1,0 +1,162 @@
+﻿@* @using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@{
+}
+<style>
+    .navbar {
+        background: linear-gradient(to right, #ff9933, #ffffff, #138808);
+    }
+
+    .navbar-nav .nav-link {
+        color: black;
+    }
+</style>
+<nav class="navbar navbar-expand-lg navbar navbar-light" >
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+            <img style="height: 50px; width: 120px; border-radius: 5px;" src="~/Images/Swadeshilogo.jpg" height="30" alt="" loading="lazy" />
+        </a>
+
+        <div class="collapse navbar-collapse" id="navbarToggler">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/">Home</a>
+                </li>
+
+         
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("AboutUs", "Home")">About Us</a>
+                </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("ContactUs", "Home")">Contact Us</a>
+                </li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/Identity/Account/Register?returnUrl=%2F">Seller Registration</a>
+                </li>
+            </ul>
+
+            <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Search Products" aria-label="Search"onchange="setSearchQuery(this.value)">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+
+            <ul class="navbar-nav ml-auto">
+               
+                <ul class="navbar-nav">
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <li class="nav-item">
+                            <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+                        </li>
+                        <li class="nav-item">
+                            <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                <button id="logout" type="submit" class="btn btn-primary">Logout</button>
+                            </form>
+                        </li>
+                    }
+                    else
+                    {
+                       
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login"><button class="btn btn-primary">Login</button></a>
+                        </li>
+                    }
+                </ul>
+            </ul>
+        </div>
+    </div>
+</nav> *@
+
+                                @using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@{
+}
+<style>
+    .navbar {
+        background: linear-gradient(to right, #ff9933, #ffffff, #138808);
+      
+    }
+
+    .navbar-nav .nav-link {
+        color: black ;
+    }
+    
+</style>
+<nav class="navbar navbar-expand-lg >
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+            <img style="height: 50px; width: 120px; border-radius:5px" src="~/Images/Swadeshilogo.jpg" height="30" alt="" loading="lazy" />
+        </a>
+
+        <div class="collapse navbar-collapse" id="navbarToggler">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/">Home</a>
+                </li>
+
+         
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("AboutUs", "Home")">About Us</a>
+                </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("ContactUs", "Home")">Contact Us</a>
+                </li>
+
+
+                  <li class="nav-item">
+                  
+                      <a class="nav-link" href="@Url.Action("WorkInProgress", "Home")">Seller Registration</a>
+                  </li>
+            </ul>
+
+            <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Search Products" aria-label="Search" onchange="setSearchQuery(this.value)">
+                <button class="btn btn-outline-primary" type="submit">Search</button>
+            </form>
+
+            <ul class="navbar-nav ml-auto">
+               
+                <ul class="navbar-nav">
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <li class="nav-item">
+                            <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+                        </li>
+                        <li class="nav-item">
+                            <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                <button id="logout" type="submit" class="btn btn-primary">Logout</button>
+                            </form>
+                        </li>
+                    }
+                    else
+                    {
+                       
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login"><button class="btn btn-primary">Login</button></a>
+                        </li>
+                    }
+                </ul>
+            </ul>
+        </div>
+    </div>
+</nav>

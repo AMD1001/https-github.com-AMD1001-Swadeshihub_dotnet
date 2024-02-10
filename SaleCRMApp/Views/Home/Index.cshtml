@@ -1,0 +1,124 @@
+﻿@* @{
+    ViewData["Title"] = "Home Page";
+}
+@using SaleCRMApp.Models
+@model List<State>
+<div class="container" style="width:100%">
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" style="max-width: 100%;">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="https://www.uniekart.com/images/inner_banner1.jpeg" class="d-block w-100" alt="Slide 1">
+            </div>
+            <div class="carousel-item">
+                <img src="https://www.uniekart.com/images/inner_banner2.jpeg" class="d-block w-100" alt="Slide 2">
+            </div>
+            <div class="carousel-item">
+                <img src="https://swadeshi-dukan.com/cdn/shop/files/Banner_2_1800x.jpg?v=1614726309" class="d-block w-100" alt="Slide 3">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+    <br />
+    <div class="container">
+        <div class="row">
+            @foreach (var state in Model)
+            {
+                <div class="col-md-4">
+                    <div class="card mb-4" style="height: 400px;">
+                        <img src="data:image/jpeg;base64,@Convert.ToBase64String(state.StateImage)" class="card-img-top" alt="@state.StateName" style="height: 200px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title">@state.StateName</h5>
+                            <p class="card-text" style="height: 100px; overflow: hidden;">@state.StateDescription</p>
+                            <a href="@Url.Action("GetProduct", "ProductView", new { StateName = state.StateName })" class="btn btn-primary">Know More</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+ *@
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+@using SaleCRMApp.Models
+@model List<State>
+
+<style>
+    /* Make the image fully responsive */
+    .carousel-inner img {
+        width: 100%;
+        height: 100%;
+    }
+
+    /* Override Bootstrap container styles for full-width */
+    .custom-container {
+        padding-right: 2;
+        padding-left: 2;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .card {
+        transition: transform 0.2s, box-shadow 0.2s;
+        border-radius: 10px; /* Adjust border radius as needed */
+    }
+
+        .card:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transform: scale(1.03);
+        }
+</style>
+<br></br>
+
+<div class="container-fluid custom-container">
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" style="max-width: 1300px; margin: auto;">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="https://www.uniekart.com/images/inner_banner1.jpeg" class="d-block w-100 img-fluid" alt="Slide 1">
+            </div>
+            <div class="carousel-item">
+                <img src="https://www.uniekart.com/images/inner_banner2.jpeg" class="d-block w-100 img-fluid" alt="Slide 2">
+            </div>
+            <div class="carousel-item">
+                <img src="https://swadeshi-dukan.com/cdn/shop/files/Banner_2_1800x.jpg?v=1614726309" class="d-block w-100 img-fluid" alt="Slide 3">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>
+
+<br />
+<div class="container">
+    <div class="row">
+        @foreach (var state in Model)
+        {
+            <div class="col-md-4">
+                <div class="card mb-4" style="height: 400px;">
+                    <img src="data:image/jpeg;base64,@Convert.ToBase64String(state.StateImage)" class="card-img-top" alt="@state.StateName" style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">@state.StateName</h5>
+                        <p class="card-text" style="height: 100px; overflow: hidden;">@state.StateDescription</p>
+                        <a href="@Url.Action("GetProduct", "ProductView", new { stateName = state.StateName })" class="btn btn-primary">Know More</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+</div>
