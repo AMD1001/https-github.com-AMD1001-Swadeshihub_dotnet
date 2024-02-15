@@ -1,0 +1,49 @@
+﻿@model List<SwadeshiApp.Models.Cart>
+
+<h2>Cart</h2>
+
+@if (Model.Count == 0)
+{
+    <p>Your cart is empty.</p>
+}
+else
+{
+    <div class="row">
+        @foreach (var item in Model)
+     @*    {
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Product.Name</h5>
+                        <p class="card-text">Quantity: @item.Quantity</p>
+                        <form asp-action="RemoveFromCart" asp-route-cartItemId="@item.CartItemId" method="post">
+                            <button type="submit" class="btn btn-danger">Remove</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        } *@
+        {
+        <div class="col-md-4">
+            <div class="card mb-4" style="height: 400px; overflow: hidden;">
+                <div class="card-img-top" style="height: 200px; overflow: hidden;">
+                    <img src="@item.Product.PicturePath" class="img-fluid" alt="@item.Product.Name" style="height: 100%; object-fit: cover;">
+                </div>
+                <div class="card-body">
+                    <h3 class="car-title">@item.Product.Name</h3>
+                        <h5 class="card-title">@item.Product.UnitPrice</h5>
+                        <div class="mt-4 text-center">
+                            <a href="#" class="btn btn-primary btn-lg">Buy Now</a>
+                            <form asp-action="RemoveFromCart" asp-route-cartItemId="@item.CartItemId" method="post">
+                                <button type="submit" class="btn btn-danger">Remove</button>
+                            </form>
+                        </div>
+                   
+                </div>
+                   
+            </div>
+        </div>
+        }
+    </div>
+   
+}

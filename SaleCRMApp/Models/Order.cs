@@ -15,10 +15,10 @@ namespace SwadeshiApp.Models
         public int CustomerID { get; set; }
         public Nullable<int> PaymentID { get; set; }
         public Nullable<int> ShippingID { get; set; }
-        public Nullable<int> Discount { get; set; }
-        public Nullable<int> Taxes { get; set; }
+       // public Nullable<int> Discount { get; set; }
+       // public Nullable<int> Taxes { get; set; }
         public Nullable<int> TotalAmount { get; set; }
-        public Nullable<bool> isCompleted { get; set; }
+       // public Nullable<bool> isCompleted { get; set; }
         public Nullable<System.DateTime> OrderDate { get; set; }
         public Nullable<bool> DIspatched { get; set; }
         public Nullable<System.DateTime> DispatchedDate { get; set; }
