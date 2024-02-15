@@ -143,7 +143,7 @@ namespace SwadeshiApp.Controllers.Seller
         }
 
         // GET: Products/Delete/5
-        //adding new line here
+        //adding new line here changes by ketan
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Product == null)
