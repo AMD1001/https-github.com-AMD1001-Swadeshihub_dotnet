@@ -118,7 +118,7 @@ namespace SwadeshiApp.Controllers.Seller
             {
                 try
                 {
-                    product.PicturePath = SaveImage(product.Image);
+                    if (product.Image != null)                    {                        product.PicturePath = SaveImage(product.Image);                    }                    _context.Update(product);
                     _context.Update(product);
                     await _context.SaveChangesAsync();
                 }
@@ -143,6 +143,7 @@ namespace SwadeshiApp.Controllers.Seller
         }
 
         // GET: Products/Delete/5
+        //adding new line here
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Product == null)

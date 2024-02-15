@@ -11,7 +11,7 @@ namespace SwadeshiApp.Controllers.User
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<IdentityUser> _userManager;
-        string email = "amd123@gmail.com";
+        string email = null;
         public UsersController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
@@ -22,6 +22,7 @@ namespace SwadeshiApp.Controllers.User
         public async Task<IActionResult> Index()
         {
             IdentityUser user = await _userManager.GetUserAsync(User);
+            email = user.Email;
 
             if (user != null)
             {
