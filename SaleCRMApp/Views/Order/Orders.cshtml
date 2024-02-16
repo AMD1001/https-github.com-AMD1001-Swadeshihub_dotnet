@@ -1,0 +1,51 @@
+﻿@model List<SwadeshiApp.Models.OrderItem>
+
+@{
+    ViewData["Title"] = "Orders By User";
+}
+
+<div class="row">
+    <h2>Your Orders</h2>
+    @foreach (var order in Model)
+    {
+        <div class="col-12 mb-4">
+            <div class="card">
+                <div class="row">
+                    <div class="col-md-3">
+                        <!-- Display product image here -->
+                        <img src="@order.Product.PicturePath" class="card-img-top" alt="Product Image">
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card-body">
+                            <h5 class="card-title">@order.Product.Name</h5>
+                            <p class="card-text">Description: @order.Product.ShortDescription</p>
+                            <p class="card-text">Order ID: @order.OrderId</p>
+                            <p class="card-text">Status: @order.OrderStatus</p>
+                            <p class="card-text">Total Amount: @order.TotalAmount</p>
+                            <p class="card-text">Order Date: @order.OrderDate</p>
+                            @if (order.OrderStatus == "Ordered")
+                            {
+                                <div class="btn-group">
+                                   
+                                    <a href="@Url.Action("Delete", "Order", new { OrderId = order.OrderId})" class="btn btn-danger">Cancel Order</a>
+
+                                </div>
+                            }
+                            else if (order.OrderStatus == "Shipped")
+                            {
+                                <p class="card-text">Shipped Date: @order.ShippingDate</p>
+                            }
+                            else if (order.OrderStatus == "Delivered")
+                            {
+                                
+                                <p class="card-text">Shipping Date: @order.ShippingDate</p>
+                                <p class="card-text">Delivery Date: @order.DeliveryDate</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
