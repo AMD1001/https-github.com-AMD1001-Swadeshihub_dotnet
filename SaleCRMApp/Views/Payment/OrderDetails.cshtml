@@ -1,0 +1,106 @@
+﻿@* @model SwadeshiApp.Models.IndexViewModel
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="initiateOrder" method="post">
+            <div class="form-group">
+                <label asp-for="OrderDetails.FirstName">First Name</label>
+                <input asp-for="OrderDetails.FirstName" class="form-control" readonly value="@Model.UserDetail.FirstName" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="OrderDetails.LastName">Last Name</label>
+                <input asp-for="OrderDetails.LastName" class="form-control" readonly value="@Model.UserDetail.LastName" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="OrderDetails.MobileNo">Mobile Number</label>
+                <input asp-for="OrderDetails.MobileNo" class="form-control" readonly value="@Model.UserDetail.MobileNo" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="OrderDetails.UserId">User ID</label>
+                <input asp-for="OrderDetails.UserId" class="form-control" readonly value="@Model.UserDetail.Email" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="OrderDetails.TotalAmount">Total Amount</label>
+                <input asp-for="OrderDetails.TotalAmount" class="form-control" readonly value="@Model.OrderDetails.TotalAmount" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="OrderDetails.Address">Address</label>
+                <input asp-for="OrderDetails.Address" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="OrderDetails.city">City</label>
+                <input asp-for="OrderDetails.city" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="OrderDetails.PinCode">Pin Code</label>
+                <input asp-for="OrderDetails.PinCode" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Continue To Pay</button>
+            </div>
+        </form>
+    </div>
+</div>
+ *@
+ @model SwadeshiApp.Models.IndexViewModel
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="initiateOrder" method="post">
+            <div class="form-group">
+                <label asp-for="UserDetail.FirstName">First Name</label>
+                <input asp-for="UserDetail.FirstName" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="UserDetail.LastName">Last Name</label>
+                <input asp-for="UserDetail.LastName" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="UserDetail.MobileNo">Mobile Number</label>
+                <input asp-for="UserDetail.MobileNo" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="UserDetail.Email">User ID</label>
+                <input asp-for="UserDetail.Email" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="OrderDetails.TotalAmount">Total Amount</label>
+                <input asp-for="OrderDetails.TotalAmount" class="form-control"  />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="OrderDetails.Address">Address</label>
+                <input asp-for="OrderDetails.Address" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="OrderDetails.City">City</label>
+                <input asp-for="OrderDetails.City" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="OrderDetails.PinCode">Pin Code</label>
+                <input asp-for="OrderDetails.PinCode" class="form-control" />
+            </div>
+
+            <input type="hidden" asp-for="OrderDetails.UserId" />
+            <input type="hidden" asp-for="OrderDetails.ProductId" />
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Continue To Pay</button>
+            </div>
+        </form>
+    </div>
+</div>

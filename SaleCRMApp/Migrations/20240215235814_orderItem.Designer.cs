@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SaleCRMApp.Data;
 
@@ -11,9 +12,11 @@ using SaleCRMApp.Data;
 namespace SwadeshiApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240215235814_orderItem")]
+    partial class orderItem
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -427,11 +430,11 @@ namespace SwadeshiApp.Migrations
 
             modelBuilder.Entity("SwadeshiApp.Models.OrderItem", b =>
                 {
-                    b.Property<int?>("OrderId")
+                    b.Property<int>("OrderId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("OrderId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderId"));
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -445,6 +448,7 @@ namespace SwadeshiApp.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
@@ -463,9 +467,11 @@ namespace SwadeshiApp.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("OrderStatus")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PaymentId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PaymentMode")
@@ -479,7 +485,7 @@ namespace SwadeshiApp.Migrations
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("ShippingDate")
+                    b.Property<DateTime>("ShippingDate")
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("TotalAmount")

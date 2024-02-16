@@ -19,8 +19,8 @@ namespace SaleCRMApp.Data
         public DbSet<SubCategory> SubCategory { get; set; }
 
         public DbSet<Cart> CartItem { get; set; }
-        public DbSet<Order> Order { get; set; }
-        public DbSet<OrderDetail> OrderDetail { get; set; }
+        public DbSet<OrderItem> OrderItem { get; set; }
+      
         public DbSet<Product> Product { get; set; }
         public DbSet<Review> Review { get; set; }
         public DbSet<Wishlist> Wishlist { get; set; }
