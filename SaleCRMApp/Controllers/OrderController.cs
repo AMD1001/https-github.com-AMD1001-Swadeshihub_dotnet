@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SaleCRMApp.Data;
 using SwadeshiApp.Models;
@@ -12,10 +13,12 @@ namespace SwadeshiApp.Controllers
     public class OrderController : Controller
     {
         private readonly ApplicationDbContext _context;
-
-        public OrderController(ApplicationDbContext context)
+        private readonly UserManager<IdentityUser> _userManager;
+       
+        public OrderController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // Create order
@@ -25,19 +28,70 @@ namespace SwadeshiApp.Controllers
             if (!ModelState.IsValid)
             {
                 orderItem.Product = await _context.Product.FindAsync(orderItem.ProductId);
-                
+                orderItem.TotalAmount = orderItem.Product.UnitPrice;
+                orderItem.SupplierId = orderItem.Product.SupplierID;
+                orderItem.OrderStatus = "Ordered";
                 _context.Add(orderItem);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                
             }
-            return View(orderItem);
+            
+            return RedirectToAction(nameof(OrdersByUserId));
         }
 
         // Fetch orders by userId
-        public async Task<IActionResult> OrdersByUserId(string userId)
+        public async Task<IActionResult> OrdersByUserId()
         {
-            var orders = await _context.OrderItem.Where(o => o.UserId == userId).ToListAsync();
-            return View(orders);
+            string userId;
+            IdentityUser user = await _userManager.GetUserAsync(User);
+            userId = user.Email;
+            //var orders = await _context.OrderItem.Where(o => o.UserId == userId).ToListAsync();
+            var orders = await _context.OrderItem
+            .Include(o => o.Product) // Include the Product details
+            .Where(o => o.UserId == userId)
+            .ToListAsync();
+
+            return View("Orders", orders);
+        }
+
+        public async Task<IActionResult> NewOrderBySellerId()
+        {
+            string userId;
+            IdentityUser user = await _userManager.GetUserAsync(User);
+            userId = user.Email;
+            //var orders = await _context.OrderItem.Where(o => o.UserId == userId).ToListAsync();
+            var orders = await _context.OrderItem
+            .Include(o => o.Product) // Include the Product details
+            .Where(o => o.SupplierId == userId && o.OrderStatus == "Ordered")
+            .ToListAsync();
+
+            return View("SellerOrders", orders);
+        }
+        public async Task<IActionResult> ShippedOrderBySellerId()
+        {
+            string userId;
+            IdentityUser user = await _userManager.GetUserAsync(User);
+            userId = user.Email;
+            //var orders = await _context.OrderItem.Where(o => o.UserId == userId).ToListAsync();
+            var orders = await _context.OrderItem
+            .Include(o => o.Product) // Include the Product details
+            .Where(o => o.SupplierId == userId && o.OrderStatus == "Shipped")
+            .ToListAsync();
+
+            return View("SellerOrders", orders);
+        }
+        public async Task<IActionResult> DeliveredOrderBySellerId()
+        {
+            string userId;
+            IdentityUser user = await _userManager.GetUserAsync(User);
+            userId = user.Email;
+            //var orders = await _context.OrderItem.Where(o => o.UserId == userId).ToListAsync();
+            var orders = await _context.OrderItem
+            .Include(o => o.Product) // Include the Product details
+            .Where(o => o.SupplierId == userId && o.OrderStatus == "Delivered")
+            .ToListAsync();
+
+            return View("SellerOrders", orders);
         }
 
         // Edit order by orderId
@@ -83,7 +137,7 @@ namespace SwadeshiApp.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(OrdersByUserId));
             }
             return View(orderItem);
         }
@@ -97,13 +151,14 @@ namespace SwadeshiApp.Controllers
             }
 
             var orderItem = await _context.OrderItem
-                .FirstOrDefaultAsync(m => m.OrderId == orderId);
+          .Include(m => m.Product) 
+          .FirstOrDefaultAsync(m => m.OrderId == orderId);
             if (orderItem == null)
             {
                 return NotFound();
             }
 
-            return View(orderItem);
+            return View("DeleteConfirm",orderItem);
         }
 
         [HttpPost, ActionName("Delete")]
@@ -113,12 +168,56 @@ namespace SwadeshiApp.Controllers
             var orderItem = await _context.OrderItem.FindAsync(orderId);
             _context.OrderItem.Remove(orderItem);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            //orderItem.OrderStatus = "Cancelled";
+            //orderItem.CancelledDate = DateTime.Now;
+            //_context.OrderItem.Update(orderItem);
+            //await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(OrdersByUserId));
         }
 
         private bool OrderItemExists(int id)
         {
             return _context.OrderItem.Any(e => e.OrderId == id);
         }
+
+        public async Task<IActionResult> FetchOrderDetails(int orderId)
+        {
+            var orderItem = await _context.OrderItem
+                .Include(o => o.Product)
+                .FirstOrDefaultAsync(o => o.OrderId == orderId);
+
+
+            return View("ViewOrderDetails",orderItem);
+        }
+
+        public IActionResult ViewOrderDetails(int orderId)
+        {
+            return PartialView("_OrderDetails");
+        }
+
+        public async Task<IActionResult> OrderShipement(int orderId)
+        {
+            var orderItem = await _context.OrderItem.FindAsync(orderId);
+           
+            orderItem.OrderStatus = "Shipped";
+            orderItem.ShippingDate = DateTime.Now;
+            _context.OrderItem.Update(orderItem);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(NewOrderBySellerId));
+        }
+
+        public async Task<IActionResult> OrderDeliverd(int orderId)
+        {
+            var orderItem = await _context.OrderItem.FindAsync(orderId);
+
+            orderItem.OrderStatus = "Delivered";
+            orderItem.DeliveryDate = DateTime.Now;
+            _context.OrderItem.Update(orderItem);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(ShippedOrderBySellerId));
+        }
+
+
+
     }
 }

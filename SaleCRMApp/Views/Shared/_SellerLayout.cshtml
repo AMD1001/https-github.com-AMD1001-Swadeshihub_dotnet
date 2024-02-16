@@ -51,7 +51,13 @@
                         </li> *@
 
                         <li class="nav-item">
-                            <a class="nav-link" style="color:black" href="@Url.Action("WorkInProgress", "Home")">Orders</a>
+                            <a class="nav-link" style="color:black" href="@Url.Action("NewOrderBySellerId", "Order")">New Orders</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" style="color:black" href="@Url.Action("ShippedOrderBySellerId", "Order")">Shipped Orders</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" style="color:black" href="@Url.Action("DeliveredOrderBySellerId", "Order")">Delivered Orders</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" style="color:black" href="@Url.Action("Privacy", "Home")">Contact Us</a>

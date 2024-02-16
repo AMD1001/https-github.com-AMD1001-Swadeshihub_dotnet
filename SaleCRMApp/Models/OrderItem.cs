@@ -11,6 +11,9 @@ namespace SwadeshiApp.Models
         public int? OrderId { get; set; }
 
         [Required]
+        public string SupplierId { get; set; }
+
+        [Required]
         public string UserId { get; set; }
 
         [Required]
@@ -49,6 +52,8 @@ namespace SwadeshiApp.Models
         public DateTime OrderDate { get; set; }
 
         public DateTime? DeliveryDate { get; set; }
+
+        public DateTime? CancelledDate { get; set; }
 
         public string ? OrderStatus { get; set; }
 
