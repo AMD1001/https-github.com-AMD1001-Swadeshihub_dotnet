@@ -11,12 +11,44 @@
     .card {
         margin-top: 50px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 15px;
+        background-color: #f0f3f5; /* Light background color */
+        padding: 20px;
+        transition: all 0.3s ease;
     }
 
-    #login-submit {
-        margin-top: 20px;
+        .card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+    .form-control {
+        border: none;
+        border-radius: 10px;
+        background-color: #f8f9fa; /* Lighter background color */
+        padding: 10px;
+        transition: all 0.3s ease;
     }
+
+        .form-control:focus {
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+    #registerSubmit {
+        margin-top: 20px;
+        border: none;
+        border-radius: 10px;
+        background-color: #007bff; /* Primary button color */
+        color: #fff; /* Text color */
+        padding: 10px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+        #registerSubmit:hover {
+            background-color: #0056b3; /* Darker primary button color on hover */
+        }
 </style>
+
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-6">
@@ -29,43 +61,43 @@
 
                         <div class="mb-3">
                             <label asp-for="Input.FirstName" class="form-label">First Name</label>
-                            <input asp-for="Input.FirstName" class="form-control" autocomplete="FirstName" aria-required="true" />
+                            <input asp-for="Input.FirstName" class="form-control" autocomplete="FirstName" aria-required="true" placeholder="Enter your first name">
                             <span asp-validation-for="Input.FirstName" class="text-danger"></span>
                         </div>
 
                         <div class="mb-3">
                             <label asp-for="Input.LastName" class="form-label">Last Name</label>
-                            <input asp-for="Input.LastName" class="form-control" autocomplete="LastName" aria-required="true" />
+                            <input asp-for="Input.LastName" class="form-control" autocomplete="LastName" aria-required="true" placeholder="Enter your last name">
                             <span asp-validation-for="Input.LastName" class="text-danger"></span>
                         </div>
 
                         <div class="mb-3">
                             <label asp-for="Input.MobileNo" class="form-label">Mobile No</label>
-                            <input asp-for="Input.MobileNo" class="form-control" autocomplete="Mobile No" aria-required="true" />
+                            <input asp-for="Input.MobileNo" class="form-control" autocomplete="Mobile No" aria-required="true" placeholder="Enter your mobile number">
                             <span asp-validation-for="Input.MobileNo" class="text-danger"></span>
                         </div>
 
                         <div class="mb-3">
                             <label asp-for="Input.City" class="form-label">City</label>
-                            <input asp-for="Input.City" class="form-control" autocomplete="City" aria-required="true" />
+                            <input asp-for="Input.City" class="form-control" autocomplete="City" aria-required="true" placeholder="Enter your city">
                             <span asp-validation-for="Input.City" class="text-danger"></span>
                         </div>
 
                         <div class="mb-3">
                             <label asp-for="Input.Email" class="form-label">Email</label>
-                            <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
+                            <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="Enter your email">
                             <span asp-validation-for="Input.Email" class="text-danger"></span>
                         </div>
 
                         <div class="mb-3">
                             <label asp-for="Input.Password" class="form-label">Password</label>
-                            <input asp-for="Input.Password" type="password" class="form-control" autocomplete="new-password" aria-required="true" />
+                            <input asp-for="Input.Password" type="password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Enter your password">
                             <span asp-validation-for="Input.Password" class="text-danger"></span>
                         </div>
 
                         <div class="mb-3">
                             <label asp-for="Input.ConfirmPassword" class="form-label">Confirm Password</label>
-                            <input asp-for="Input.ConfirmPassword" type="password" class="form-control" autocomplete="new-password" aria-required="true" />
+                            <input asp-for="Input.ConfirmPassword" type="password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Confirm your password">
                             <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                         </div>
 
@@ -75,26 +107,8 @@
                                 <option disabled selected>Select Role</option>
                             </select>
                             <span asp-validation-for="Input.Role" class="text-danger"></span>
-                           @*  <label asp-for="Input.Role" class="form-label">Role</label>
-                            <select asp-for="Input.Role"
-                                    asp-items="@Model.Input.RoleList.Where(r => !string.Equals(r.Value, "admin", StringComparison.OrdinalIgnoreCase))"
-                                    class="form-control"
-                                    aria-required="true">
-                                <option disabled selected>Select Role</option>
-                            </select>
-                            <span asp-validation-for="Input.Role" class="text-danger"></span> *@
-
-                           @*  <label asp-for="Input.Role" class="form-label">Role</label>
-                            <select asp-for="Input.Role"
-                                    asp-items="@Model.Input.RoleList.Where(r => r.Value != "Admin")"
-                                    class="form-control"
-                                    aria-required="true">
-                                <option disabled selected>Select Role</option>
-                            </select>
-                            <span asp-validation-for="Input.Role" class="text-danger"></span> *@
-
-
                         </div>
+                       
 
                         <button id="registerSubmit" type="submit" class="btn btn-primary">Register</button>
                     </form>

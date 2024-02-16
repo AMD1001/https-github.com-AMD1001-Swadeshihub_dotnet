@@ -12,8 +12,8 @@ using SaleCRMApp.Data;
 namespace SwadeshiApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240216003823_orderItem3")]
-    partial class orderItem3
+    [Migration("20240216094447_first")]
+    partial class first
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
