@@ -66,6 +66,23 @@ namespace SwadeshiApp.Controllers.Seller
             return View(product);
         }
 
+        public async Task<IActionResult> ViewProduct(int? ProductID)
+        {
+            if (ProductID == null || _context.Product == null)
+            {
+                return NotFound();
+            }
+
+            var product = await _context.Product
+
+                .FirstOrDefaultAsync(m => m.ProductID == ProductID);
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            return View("ViewProductDetails",product);
+        }
         public async Task<IActionResult> ViewProductDetails(int? id)
         {
             if (id == null || _context.Product == null)

@@ -111,7 +111,8 @@
                             <h5 class="card-title">@product.UnitPrice</h5>
                             <div class="btn-group btn-3d">
                                 <a href="@Url.Action("AddToCart","Cart",new { @ProductID = product.ProductID})" class="btn btn-primary" style="margin-right:20px;border-radius:10px;">Add to Cart</a>
-                                <a href="@Url.Action("Index", "Payment", new { ProductId = product.ProductID, TotalAmount = product.UnitPrice })" class="btn btn-success" style="border-radius:10px;">Buy Now</a>
+                              
+                            <a href="@Url.Action("ViewProduct", "Products", new { ProductId = product.ProductID })" class="btn btn-success" style="border-radius:10px;">View</a>
                             </div>
                         </div>
                     </div>

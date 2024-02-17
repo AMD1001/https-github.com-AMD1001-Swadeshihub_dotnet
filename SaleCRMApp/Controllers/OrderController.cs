@@ -22,7 +22,24 @@ namespace SwadeshiApp.Controllers
         }
 
         // Create order
-       
+
+        //public async Task<IActionResult> CreateOrder(OrderItem orderItem)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        orderItem.Product = await _context.Product.FindAsync(orderItem.ProductId);
+        //        orderItem.Email = orderItem.UserId;
+        //        orderItem.TotalAmount = orderItem.Product.UnitPrice;
+        //        orderItem.SupplierId = orderItem.Product.SupplierID;
+        //        orderItem.OrderStatus = "Ordered";
+        //        _context.Add(orderItem);
+        //        await _context.SaveChangesAsync();
+
+        //    }
+
+        //    return RedirectToAction(nameof(OrdersByUserId));
+        //}
+
         public async Task<IActionResult> CreateOrder(OrderItem orderItem)
         {
             if (!ModelState.IsValid)
@@ -33,16 +50,66 @@ namespace SwadeshiApp.Controllers
                 orderItem.SupplierId = orderItem.Product.SupplierID;
                 orderItem.OrderStatus = "Ordered";
                 _context.Add(orderItem);
+
+                // Decrease stock by 1
+                if (orderItem.Product.UnitInStock > 0)
+                {
+
+                    orderItem.Product.UnitInStock -= 1;
+
+                    if (orderItem.Product.UnitInStock <= 0)
+                    {
+                        orderItem.Product.ProductAvailable = false;
+                    }
+                }
+
+                try
+                {
+                    _context.Update(orderItem.Product);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ProductExists(orderItem.ProductId))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+
                 await _context.SaveChangesAsync();
-                
             }
-            
+
             return RedirectToAction(nameof(OrdersByUserId));
         }
 
+       
+
+
+        //public async Task<IActionResult> CreateCOD([Bind("FirstName,LastName,MobileNo,Email,TotalAmount,Address,City,PinCode,UserId,ProductId")]OrderItem orderItem)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        orderItem.Product = await _context.Product.FindAsync(orderItem.ProductId);
+        //        orderItem.TotalAmount = orderItem.Product.UnitPrice;
+        //        orderItem.UserId = orderItem.Email;
+
+        //        orderItem.SupplierId = orderItem.Product.SupplierID;
+        //        orderItem.PaymentMode = "Cash On Delivery";
+        //        orderItem.OrderDate = DateTime.Now;
+        //        orderItem.OrderStatus = "Ordered";
+        //        _context.Add(orderItem);
+        //        await _context.SaveChangesAsync();
+
+        //    }
+
+        //    return RedirectToAction(nameof(OrdersByUserId));
+        //}
         [HttpPost]
-      
-        public async Task<IActionResult> CreateCOD([Bind("FirstName,LastName,MobileNo,Email,TotalAmount,Address,City,PinCode,UserId,ProductId")]OrderItem orderItem)
+        public async Task<IActionResult> CreateCOD([Bind("FirstName,LastName,MobileNo,Email,TotalAmount,Address,City,PinCode,UserId,ProductId")] OrderItem orderItem)
         {
             if (!ModelState.IsValid)
             {
@@ -55,11 +122,45 @@ namespace SwadeshiApp.Controllers
                 orderItem.OrderDate = DateTime.Now;
                 orderItem.OrderStatus = "Ordered";
                 _context.Add(orderItem);
-                await _context.SaveChangesAsync();
 
+                // Decrease stock by 1
+                if(orderItem.Product.UnitInStock > 0) {
+
+                    orderItem.Product.UnitInStock -= 1;
+
+                    if(orderItem.Product.UnitInStock <= 0)
+                    {
+                        orderItem.Product.ProductAvailable =false;
+                    }
+                }
+               
+
+                try
+                {
+                    _context.Update(orderItem.Product);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ProductExists(orderItem.ProductId))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+
+                await _context.SaveChangesAsync();
             }
 
             return RedirectToAction(nameof(OrdersByUserId));
+        }
+
+        private bool ProductExists(int id)
+        {
+            return _context.Product.Any(e => e.ProductID == id);
         }
 
         // Fetch orders by userId
