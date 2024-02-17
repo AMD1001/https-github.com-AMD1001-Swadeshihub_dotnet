@@ -24,6 +24,41 @@
         .navbar-nav nav-item nav-link {
             color: black;
         }
+
+        .btn-3d {
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2); /* Add a shadow */
+            transition: all 0.3s ease; /* Add transition for smooth effect */
+        }
+
+            .btn-3d:hover {
+                transform: translateY(-2px); /* Move button up slightly on hover */
+                box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3); /* Increase shadow on hover */
+            }
+
+        .input-3d {
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2); /* Add a shadow */
+            transition: all 0.3s ease; /* Add transition for smooth effect */
+        }
+
+            .input-3d:focus {
+                transform: translateY(-2px); /* Move input up slightly on focus */
+                box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3); /* Increase shadow on focus */
+            }
+
+            .input-3d:not(:focus) {
+                transition: all 0.3s ease; /* Add transition for smooth effect on blur */
+                transform: translateY(0); /* Reset transform on blur */
+                box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2); /* Reset shadow on blur */
+            }
+
+        .link-3d {
+            transition: all 0.3s ease; /* Add transition for smooth effect */
+        }
+
+            .link-3d:hover {
+                transform: translateY(-2px); /* Move link up slightly on hover */
+                box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2); /* Add a shadow on hover */
+            }
     </style>
 </head>
 <body>
@@ -42,35 +77,35 @@
                 <div class="collapse navbar-collapse" id="navbarToggler">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link active" href="/">Home</a>
+                            <a class="nav-link active link-3d" href="/">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" style="color:black" href="@Url.Action("Index", "AppRoles")">Roles</a>
+                            <a class="nav-link link-3d" style="color:black" href="@Url.Action("Index", "AppRoles")">Roles</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" style="color:black" href="@Url.Action("Index", "Categories")">Category</a>
+                            <a class="nav-link link-3d" style="color:black" href="@Url.Action("Index", "Categories")">Category</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" style="color:black" href="@Url.Action("Index", "SubCategories")">Sub-Category</a>
+                            <a class="nav-link link-3d" style="color:black" href="@Url.Action("Index", "SubCategories")">Sub-Category</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" style="color:black" href="@Url.Action("Index", "Leads")">SellerList</a>
+                            <a class="nav-link link-3d" style="color:black" href="@Url.Action("Index", "Leads")">SellerList</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" style="color:black" href=@Url.Action("WorkInProgress", "Home")>Seller Application</a>
+                            <a class="nav-link link-3d" style="color:black" href=@Url.Action("WorkInProgress", "Home")>Seller Application</a>
                         </li>
                        @*  <li class="nav-item">
                             <a class="nav-link" style="color:black" href="@Url.Action("Privacy", "Home")">Appliaction Users</a>
                         </li> *@
                         <li class="nav-item">
-                            <a class="nav-link" style="color:black" href="@Url.Action("Index", "State")">States</a>
+                            <a class="nav-link link-3d" style="color:black" href="@Url.Action("Index", "State")">States</a>
                         </li>
 
                     </ul>
 
                     <form class="d-flex">
                         <input class="form-control me-2" type="search" placeholder="Search Products" aria-label="Search" onchange="setSearchQuery(this.value)">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
+                        <button class="btn btn-outline-success btn-3d" type="submit">Search</button>
                     </form>
 
                     <ul class="navbar-nav ml-auto">
@@ -83,7 +118,7 @@
                                 </li>
                                 <li class="nav-item">
                                     <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                                        <button id="logout" type="submit" class="btn btn-danger">Logout</button>
+                                        <button id="logout" type="submit" class="btn btn-danger btn-3d">Logout</button>
                                     </form>
                                 </li>
                             }
@@ -91,7 +126,7 @@
                             {
 
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login"><button class="btn btn-primary">Login</button></a>
+                                    <a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login"><button class="btn btn-primary btn-3d">Login</button></a>
                                 </li>
                             }
                         </ul>
@@ -104,7 +139,7 @@
         </nav>
         <partial name="_LoginPartial" />
     </header>
-    <div class="container">
+    <div class="container-fluid">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>

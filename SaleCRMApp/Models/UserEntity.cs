@@ -25,7 +25,7 @@ namespace SaleCRMApp.Models
 
             UserProfile userEntity = new UserProfile();
 
-            string connectionString = "server=DESKTOP-E4GKT8M\\MSSQLSERVER01; database=SwadeshiApp; Trusted_Connection=True;TrustServerCertificate=True; Integrated Security=true; Encrypt=true;";
+            string connectionString = "server=LAPTOP-1UGATPN9; database=SwadeshiApp; Trusted_Connection=True;TrustServerCertificate=True; Integrated Security=true; Encrypt=true;";
 
             // SQL query to execute
             string sqlQuery = "SELECT FirstName, LastName, MobileNo, Gender, Address, city, PinCode FROM AspNetUsers WHERE Email = @Email";
