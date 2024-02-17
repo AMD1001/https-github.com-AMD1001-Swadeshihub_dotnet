@@ -31,9 +31,10 @@ else
                 </div>
                 <div class="card-body">
                     <h3 class="car-title">@item.Product.Name</h3>
-                        <h5 class="card-title">@item.Product.UnitPrice</h5>
+                        <h5 class="card-title">Rs.@item.Product.UnitPrice</h5>
                         <div class="mt-4 text-center">
-                            <a href="#" class="btn btn-primary btn-lg">Buy Now</a>
+                           @*  <a href="@Url.Action("ViewProduct", "Products", new { ProductId = @item.ProductID })" class="btn btn-success" style="border-radius:10px;">View</a> *@
+                            <a href="@Url.Action("Index", "Payment", new { ProductId = @item.ProductID, TotalAmount = @item.Product.UnitPrice })" class="btn btn-success" style="border-radius:10px;">Buy Now</a>
                             <form asp-action="RemoveFromCart" asp-route-cartItemId="@item.CartItemId" method="post">
                                 <button type="submit" class="btn btn-danger">Remove</button>
                             </form>
