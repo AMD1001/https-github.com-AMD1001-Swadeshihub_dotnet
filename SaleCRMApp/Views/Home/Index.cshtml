@@ -146,31 +146,44 @@
         }
     </div>
 </div>*@
-<div class="container-fluid" style="margin-top: 50px;">
-    <div class="row">
-        @foreach (var state in Model)
-        {
-            <div class="col-md-3">
-                <div class="card-sl">
-                    <div class="card-image">
-                        <img src="data:image/jpeg;base64,@Convert.ToBase64String(state.StateImage)" class="card-img-top" alt="@state.StateName" style="height: 200px; object-fit: cover;">
-                    </div>
+@{
+    ViewData["Title"] = "Home Page";
+    bool isUser = User.IsInRole("User");
+}
 
-                    <a class="card-action" href="#"><i class="fa fa-heart"></i></a>
-                    <div class="card-heading">
-                        @state.StateName
-                    </div>
-                    <div class="card-text" style="height: 100px; overflow: hidden;">
-                        @state.StateDescription
-                    </div>
+@if (isUser || !User.Identity.IsAuthenticated)
+{
+    <div class="container-fluid" style="margin-top: 50px;">
+        <div class="row">
+            @foreach (var state in Model)
+            {
+                <div class="col-md-3">
+                    <div class="card-sl">
+                        <div class="card-image">
+                            <img src="data:image/jpeg;base64,@Convert.ToBase64String(state.StateImage)" class="card-img-top" alt="@state.StateName" style="height: 200px; object-fit: cover;">
+                        </div>
 
-                    <a href="@Url.Action("GetProduct", "ProductView", new { stateName = state.StateName })" class="card-button btn btn-primary">Know More</a>
+                        <a class="card-action" href="#"><i class="fa fa-heart"></i></a>
+                        <div class="card-heading">
+                            @state.StateName
+                        </div>
+                        <div class="card-text" style="height: 100px; overflow: hidden;">
+                            @state.StateDescription
+                        </div>
 
+                        <a href="@Url.Action("GetProduct", "ProductView", new { stateName = state.StateName })" class="card-button btn btn-primary">Know More</a>
+
+                    </div>
+                    <br></br>
                 </div>
-                <br></br>
-            </div>
-        }
+            }
+        </div>
     </div>
-</div>
+}
+else
+{
+    <p>Welcome to the Swadeshi Hub App</p>
+}
+
 
 </div>

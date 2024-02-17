@@ -28,6 +28,7 @@ namespace SwadeshiApp.Controllers
             if (!ModelState.IsValid)
             {
                 orderItem.Product = await _context.Product.FindAsync(orderItem.ProductId);
+                orderItem.Email = orderItem.UserId;
                 orderItem.TotalAmount = orderItem.Product.UnitPrice;
                 orderItem.SupplierId = orderItem.Product.SupplierID;
                 orderItem.OrderStatus = "Ordered";
@@ -36,6 +37,28 @@ namespace SwadeshiApp.Controllers
                 
             }
             
+            return RedirectToAction(nameof(OrdersByUserId));
+        }
+
+        [HttpPost]
+      
+        public async Task<IActionResult> CreateCOD([Bind("FirstName,LastName,MobileNo,Email,TotalAmount,Address,City,PinCode,UserId,ProductId")]OrderItem orderItem)
+        {
+            if (!ModelState.IsValid)
+            {
+                orderItem.Product = await _context.Product.FindAsync(orderItem.ProductId);
+                orderItem.TotalAmount = orderItem.Product.UnitPrice;
+                orderItem.UserId = orderItem.Email;
+
+                orderItem.SupplierId = orderItem.Product.SupplierID;
+                orderItem.PaymentMode = "Cash On Delivery";
+                orderItem.OrderDate = DateTime.Now;
+                orderItem.OrderStatus = "Ordered";
+                _context.Add(orderItem);
+                await _context.SaveChangesAsync();
+
+            }
+
             return RedirectToAction(nameof(OrdersByUserId));
         }
 

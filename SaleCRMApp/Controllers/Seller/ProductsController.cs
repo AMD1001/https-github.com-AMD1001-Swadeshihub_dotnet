@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SaleCRMApp.Data;
+using SaleCRMApp.Models;
 using SwadeshiApp.Models;
 
 namespace SwadeshiApp.Controllers.Seller
@@ -15,18 +17,34 @@ namespace SwadeshiApp.Controllers.Seller
     {
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _webHostEnvironment;
-
-        public ProductsController(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment)
+        private readonly UserManager<IdentityUser> _userManager;
+        public ProductsController(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment, UserManager<IdentityUser> userManager)
         {
             _context = context;
             _webHostEnvironment = webHostEnvironment;
+            _userManager = userManager;
         }
 
         // GET: Products
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Product;
-            return View(await applicationDbContext.ToListAsync());
+
+
+            IdentityUser user = await _userManager.GetUserAsync(User);
+            string email = user.Email;
+           
+            if (user == null)
+            {
+                
+                return RedirectToAction("Login", "Account");
+            }
+            
+            // Fetch products associated with the current user
+            var products = await _context.Product
+                .Where(p => p.SupplierID == email)
+                .ToListAsync();
+
+            return View(products);
         }
 
         // GET: Products/Details/5
@@ -46,6 +64,24 @@ namespace SwadeshiApp.Controllers.Seller
             }
 
             return View(product);
+        }
+
+        public async Task<IActionResult> ViewProductDetails(int? id)
+        {
+            if (id == null || _context.Product == null)
+            {
+                return NotFound();
+            }
+
+            var product = await _context.Product
+
+                .FirstOrDefaultAsync(m => m.ProductID == id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            return View("ViewProductDetails",product);
         }
 
         // GET: Products/Create

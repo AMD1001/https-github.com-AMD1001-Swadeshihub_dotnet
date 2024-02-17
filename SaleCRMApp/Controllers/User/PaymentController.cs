@@ -26,6 +26,12 @@ namespace SwadeshiApp.Controllers.User
 
         public async Task<IActionResult> Index(decimal TotalAmount, int ProductId)
         {
+            if (!User.Identity.IsAuthenticated)
+            {
+                // User is not logged in, redirect to the login page
+                return Redirect("/Identity/Account/Login");
+
+            }
             IdentityUser user = await _userManager.GetUserAsync(User);
             string email = user?.Email;
 

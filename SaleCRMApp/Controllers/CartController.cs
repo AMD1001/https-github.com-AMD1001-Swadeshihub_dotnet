@@ -93,18 +93,25 @@ namespace SwadeshiApp.Controllers
 
         public async Task<IActionResult> AddToCart(int productId)
         {
+            if (!User.Identity.IsAuthenticated)
+            {
+                // User is not logged in, redirect to the login page
+                return Redirect("/Identity/Account/Login");
+
+            }
+
             IdentityUser user = await _userManager.GetUserAsync(User);
             string email = user.Email;
             var userId = email;
 
-            var product = _context.Product.Find(productId);
+            var product = await _context.Product.FindAsync(productId);
 
             if (product == null)
             {
                 return NotFound(); // Product not found, handle accordingly
             }
 
-            var cartItem = _context.CartItem.FirstOrDefault(ci => ci.ProductID == productId && ci.UserId == userId);
+            var cartItem = await _context.CartItem.FirstOrDefaultAsync(ci => ci.ProductID == productId && ci.UserId == userId);
 
             if (cartItem != null)
             {
@@ -122,7 +129,7 @@ namespace SwadeshiApp.Controllers
                 _context.CartItem.Add(cartItem);
             }
 
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return RedirectToAction("Index");
         }
