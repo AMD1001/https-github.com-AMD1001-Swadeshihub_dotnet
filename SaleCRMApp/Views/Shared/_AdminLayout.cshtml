@@ -24,7 +24,7 @@
         .navbar-nav nav-item nav-link {
             color: black;
         }
-
+        
         .btn-3d {
             box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2); /* Add a shadow */
             transition: all 0.3s ease; /* Add transition for smooth effect */
@@ -59,7 +59,14 @@
                 transform: translateY(-2px); /* Move link up slightly on hover */
                 box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2); /* Add a shadow on hover */
             }
+
+       
+        
+            
+
+
     </style>
+    
 </head>
 <body>
     <header>
@@ -89,11 +96,11 @@
                             <a class="nav-link link-3d" style="color:black" href="@Url.Action("Index", "SubCategories")">Sub-Category</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link link-3d" style="color:black" href="@Url.Action("Index", "Leads")">SellerList</a>
+                            <a class="nav-link link-3d" style="color:black" href="@Url.Action("Index", "Seller")">SellerList</a>
                         </li>
-                        <li class="nav-item">
+                      @*   <li class="nav-item">
                             <a class="nav-link link-3d" style="color:black" href=@Url.Action("WorkInProgress", "Home")>Seller Application</a>
-                        </li>
+                        </li> *@
                        @*  <li class="nav-item">
                             <a class="nav-link" style="color:black" href="@Url.Action("Privacy", "Home")">Appliaction Users</a>
                         </li> *@
@@ -139,11 +146,18 @@
         </nav>
         <partial name="_LoginPartial" />
     </header>
-    <div class="container-fluid">
+ 
+    <div class="container-fluid" style="min-height:750px;">
         <main role="main" class="pb-3">
             @RenderBody()
+          
         </main>
     </div>
+    
+   
+    <br/>
+    
+
     @Html.Partial("_FooterPartial")
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

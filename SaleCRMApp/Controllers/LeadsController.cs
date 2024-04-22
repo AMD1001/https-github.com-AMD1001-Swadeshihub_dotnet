@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SaleCRMApp.Data;
 using SaleCRMApp.Models;
+using SwadeshiApp.Models;
 
 namespace SaleCRMApp.Controllers
 {
@@ -21,25 +22,25 @@ namespace SaleCRMApp.Controllers
             _context = context;
         }
 
-        [Authorize(Roles = "Sales,Admin")]
+        [Authorize(Roles = "Admin")]
         // GET: Leads
         public async Task<IActionResult> Index()
         {
-              return _context.SalesLead != null ? 
-                          View(await _context.SalesLead.ToListAsync()) :
+              return _context.Supplier != null ? 
+                          View(await _context.Supplier.ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.SalesLead'  is null.");
         }
-        [Authorize(Roles = "Sales,Admin")]
+        [Authorize(Roles = "Admin")]
         // GET: Leads/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.SalesLead == null)
+            if (id == null || _context.Supplier == null)
             {
                 return NotFound();
             }
 
-            var salesLeadEntity = await _context.SalesLead
-                .FirstOrDefaultAsync(m => m.id == id);
+            var salesLeadEntity = await _context.Supplier
+                .FirstOrDefaultAsync(m => m.SupplierID == id);
             if (salesLeadEntity == null)
             {
                 return NotFound();
@@ -47,19 +48,19 @@ namespace SaleCRMApp.Controllers
 
             return View(salesLeadEntity);
         }
-        [Authorize(Roles = "Sales,Admin")]
+        [Authorize(Roles = "Admin")]
         // GET: Leads/Create
         public IActionResult Create()
         {
             return View();
         }
-        [Authorize(Roles = "Sales,Admin")]
+        [Authorize(Roles = "Admin")]
         // POST: Leads/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,FirstName,LastName,Mobile,Email,Source")] SalesLeadEntity salesLeadEntity)
+        public async Task<IActionResult> Create([Bind("id,FirstName,LastName,Mobile,Email,Source")] Supplier salesLeadEntity)
         {
             if (ModelState.IsValid)
             {
@@ -73,12 +74,12 @@ namespace SaleCRMApp.Controllers
         // GET: Leads/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.SalesLead == null)
+            if (id == null || _context.Supplier == null)
             {
                 return NotFound();
             }
 
-            var salesLeadEntity = await _context.SalesLead.FindAsync(id);
+            var salesLeadEntity = await _context.Supplier.FindAsync(id);
             if (salesLeadEntity == null)
             {
                 return NotFound();
@@ -91,9 +92,9 @@ namespace SaleCRMApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,FirstName,LastName,Mobile,Email,Source")] SalesLeadEntity salesLeadEntity)
+        public async Task<IActionResult> Edit(int id, [Bind("id,FirstName,LastName,Mobile,Email,Source")] Supplier salesLeadEntity)
         {
-            if (id != salesLeadEntity.id)
+            if (id != salesLeadEntity.SupplierID)
             {
                 return NotFound();
             }
@@ -107,7 +108,7 @@ namespace SaleCRMApp.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!SalesLeadEntityExists(salesLeadEntity.id))
+                    if (!SalesLeadEntityExists(salesLeadEntity.SupplierID))
                     {
                         return NotFound();
                     }
@@ -124,13 +125,13 @@ namespace SaleCRMApp.Controllers
         // GET: Leads/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.SalesLead == null)
+            if (id == null || _context.Supplier == null)
             {
                 return NotFound();
             }
 
-            var salesLeadEntity = await _context.SalesLead
-                .FirstOrDefaultAsync(m => m.id == id);
+            var salesLeadEntity = await _context.Supplier
+                .FirstOrDefaultAsync(m => m.SupplierID == id);
             if (salesLeadEntity == null)
             {
                 return NotFound();
@@ -144,14 +145,14 @@ namespace SaleCRMApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.SalesLead == null)
+            if (_context.Supplier == null)
             {
                 return Problem("Entity set 'ApplicationDbContext.SalesLead'  is null.");
             }
-            var salesLeadEntity = await _context.SalesLead.FindAsync(id);
+            var salesLeadEntity = await _context.Supplier.FindAsync(id);
             if (salesLeadEntity != null)
             {
-                _context.SalesLead.Remove(salesLeadEntity);
+                _context.Supplier.Remove(salesLeadEntity);
             }
             
             await _context.SaveChangesAsync();
@@ -160,7 +161,7 @@ namespace SaleCRMApp.Controllers
 
         private bool SalesLeadEntityExists(int id)
         {
-          return (_context.SalesLead?.Any(e => e.id == id)).GetValueOrDefault();
+          return (_context.Supplier?.Any(e => e.SupplierID == id)).GetValueOrDefault();
         }
     }
 }

@@ -12,8 +12,8 @@ using SaleCRMApp.Data;
 namespace SwadeshiApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240216094447_first")]
-    partial class first
+    [Migration("20240221135352_dummy")]
+    partial class dummy
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -235,39 +235,6 @@ namespace SwadeshiApp.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("SaleCRMApp.Models.SalesLeadEntity", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Mobile")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Source")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("id");
-
-                    b.ToTable("SalesLead");
-                });
-
             modelBuilder.Entity("SaleCRMApp.Models.State", b =>
                 {
                     b.Property<int>("Id")
@@ -440,6 +407,9 @@ namespace SwadeshiApp.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime?>("CancelledDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("City")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -484,6 +454,10 @@ namespace SwadeshiApp.Migrations
 
                     b.Property<DateTime?>("ShippingDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("SupplierId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("TotalAmount")
                         .HasColumnType("decimal(18,2)");

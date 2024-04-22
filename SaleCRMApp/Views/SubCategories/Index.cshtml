@@ -3,13 +3,40 @@
 @{
     ViewData["Title"] = "Index";
 }
+<style>
+    .btn-3d {
+        box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+        border-radius: 10px;
+    }
 
-<h1>Index</h1>
+        .btn-3d:hover {
+            transform: translateY(-2px);
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
+        }
+
+    .neumorphic-table {
+        border-collapse: collapse;
+        width: 100%;
+        background: linear-gradient(to right, #fff1ea, #ffffff, #ebfef4 );
+    }
+
+        .neumorphic-table th,
+        .neumorphic-table td {
+            padding: 20px;
+            text-align: left;
+            /* background: #e0e0e0;*/
+            /* border-radius: 20px;*/
+            border: 1px solid #000000;
+            box-shadow: 1px 1px 5px #bcbcbc, -1px -1px 15px #ffffff;
+        }
+</style>
+<h1>Sub Category List</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-primary btn-3d">Create New</a>
 </p>
-<table class="table">
+<table class="neumorphic-table">
     <thead>
         <tr>
             <th>
@@ -24,7 +51,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Category)
             </th>
-            <th></th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -43,9 +70,9 @@
                 @Html.DisplayFor(modelItem => item.CategoryName)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.SubCategoryID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.SubCategoryID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.SubCategoryID">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.SubCategoryID" class="btn btn-primary btn-3d">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.SubCategoryID" class="btn btn-success btn-3d">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.SubCategoryID" class="btn btn-danger btn-3d">Delete</a>
             </td>
         </tr>
 }

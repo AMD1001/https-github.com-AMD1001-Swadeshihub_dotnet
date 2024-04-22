@@ -58,7 +58,79 @@
                 transform: translateY(-2px); /* Move link up slightly on hover */
                 box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2); /* Add a shadow on hover */
             }
+
+        .info-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .information-box {
+            background-color: #f0f0f0;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        .image-box {
+            flex: 1;
+            margin: 0 20px;
+        }
+
+        .paragraph-box p {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+       
+        .info-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .information-box {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+            .information-box h2 {
+                color: #007bff;
+                font-size: 24px;
+                margin-bottom: 10px;
+            }
+
+            .information-box p {
+                color: #555;
+                font-size: 18px;
+                line-height: 1.5;
+            }
+
+        .image-box img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .paragraph-box p {
+            color: #555;
+            font-size: 18px;
+            line-height: 1.5;
+            text-align: justify;
+        }
+
+       
+
     </style>
+
+
+    
 </head>
 <body>
     <header>
@@ -95,7 +167,7 @@
                             <a class="nav-link link-3d" style="color:black" href="@Url.Action("DeliveredOrderBySellerId", "Order")">Delivered Orders</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link link-3d" style="color:black" href="@Url.Action("Privacy", "Home")">Contact Us</a>
+                            <a class="nav-link link-3d" style="color:black" href="@Url.Action("ContactUs", "Home")">Contact Us</a>
                         </li>
 
                     </ul>
@@ -133,14 +205,20 @@
                 </div>
             </div>
         </nav>
+        
 
         <partial name="_LoginPartial" />
     </header>
-    <div class="container-fluid">
-        <main role="main" class="pb-3">
+   
+    <div class="container-fluid" style="min-height:750px;">
+        <main role="main" class="pb-1">
             @RenderBody()
+           
+
         </main>
+
     </div>
+   
     @Html.Partial("_FooterPartial")
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

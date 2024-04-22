@@ -36,6 +36,17 @@ namespace SwadeshiApp.Controllers.User
                 return RedirectToAction("Login", "Account");
             }
         }
+        [HttpGet]
+        public async Task<IActionResult> Sellers()
+        {
+           
+
+                UserEntity userEntity = new UserEntity(); // Replace with the appropriate class
+               List<UserProfile> sellerlist= userEntity.GetSellerList();
+
+                return View("SellerList",sellerlist);
+           
+        }
 
         [HttpGet]
         public IActionResult Edit()

@@ -84,10 +84,10 @@
                             <a class="nav-link link-3d" style="color:black" href="@Url.Action("Index", "Users")">Profile</a>
                         </li>
 
-                        <li class="nav-item">
+                       @* <li class="nav-item">
                             <a class="nav-link link-3d" style="color:black" href="@Url.Action("WorkInProgress", "Home")">Wishlist</a>
                         </li>
-
+*@
                         <li class="nav-item">
                             <a class="nav-link link-3d" style="color:black" href="@Url.Action("OrdersByUserId", "Order")">Orders</a>
                         </li>
@@ -95,7 +95,7 @@
                             <a class="nav-link link-3d" style="color:black" href="@Url.Action("Index", "Cart")">Cart</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link link-3d" style="color:black" href="@Url.Action("Privacy", "Home")">ContactUs</a>
+                            <a class="nav-link link-3d" style="color:black" href="@Url.Action("ContactUs", "Home")">ContactUs</a>
                         </li>
 
 
@@ -136,7 +136,7 @@
 
         <partial name="_LoginPartial" />
     </header>
-    <div class="container-fluid">
+    <div class="container-fluid" style="min-height:750px;">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>

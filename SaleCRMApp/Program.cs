@@ -21,7 +21,9 @@ if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
 }
-app.UseStaticFiles();
+//This method is also called middleware Components. And This method is called at Runtime.
+//This Method is execute in the Same Sequence as Stated Below.
+app.UseStaticFiles(); //Enables Static Files To be Served To Client.
 
 app.UseRouting();
 app.UseAuthentication();;

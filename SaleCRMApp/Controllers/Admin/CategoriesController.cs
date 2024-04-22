@@ -36,7 +36,12 @@ namespace SwadeshiApp.Controllers.Admin
             }
 
             var category = await _context.Category
-                .FirstOrDefaultAsync(m => m.CategoryID == id);
+                .FirstOrDefaultAsync(m => m.CategoryID == id); //find the first element that matches
+                                                               //the condition where the CategoryID
+                                                               //property is equal to the provided id value.
+                                                               //If no such element is found, it will return
+                                                               //null (or default value for the type of element in the sequence).
+
             if (category == null)
             {
                 return NotFound();

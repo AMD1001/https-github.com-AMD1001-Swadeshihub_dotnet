@@ -12,7 +12,7 @@ namespace SaleCRMApp.Data
         {
         }
 
-        public DbSet<SalesLeadEntity> SalesLead { get; set; }
+        
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
         public DbSet<UserEntity> user { get; set; }
         public DbSet<Category> Category { get; set; }
